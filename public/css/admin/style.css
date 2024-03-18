@@ -1,0 +1,143 @@
+.table-pesananMasuk table{
+    font-family: 'Open Sans';
+}
+.table-pesananMasuk table th {
+    font-size: 12px;
+    background-color: #dedede;
+    color: #656768;
+}
+
+
+.table-pesananProses table{
+    font-family: 'Open Sans';
+}
+.table-pesananProses table th {
+    font-size: 12px;
+    background-color: #dedede;
+    color: #656768;
+}
+
+
+.table-riwayatPesanan table{
+    font-family: 'Open Sans';
+}
+.table-riwayatPesanan table th {
+    font-size: 12px;
+    background-color: #dedede;
+    color: #656768;
+}
+
+.produk table{
+    font-family: 'Open Sans';
+}
+.produk table th {
+    font-size: 12px;
+    background-color: #dedede;
+    color: #656768;
+}
+.produk table td {
+    font-size: 12px;
+}
+
+
+.produk {
+    font-size: 18px;
+}
+
+.kategori, .tanggal, .search, .tombolSearch {
+    padding: 5px;
+    padding-top: 15px;
+}
+.kategori {
+    padding-left: 26px;
+}
+.tambahProduk {
+    background-color: #00b11b;
+    padding: 8px 6px;
+    border-radius: 5px;
+    margin-left: 19px;
+    color: #ffffff;
+    font-size: 14px;
+}
+#EditProduk {
+    text-align: start;
+}
+.hapusProduk {
+    background-color: #ff0000;
+    font-size: 14px;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.editProduk {
+    background-color: #00b11b;
+    font-size: 14px;
+    color:#ffffff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.formTambahProduk {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 9999;
+}
+.label {
+    color: #000000;
+    width: 40%;
+    font-size: 14px;
+    font-family: 'Open Sans';
+}
+.input {
+    color: #000000;
+    width: 57%;
+    font-size: 13px;
+    font-family: 'Open Sans';
+}
+.inputgambar, .inputpdf {
+    color: #000000;
+    width: 57%;
+    font-size: 13px;
+    font-family: 'Open Sans';
+}
+.inputketerangan {
+    color: #000000;
+    width: 97%;
+    font-size: 13px;
+    font-family: 'Open Sans';
+}
+.cancel{
+    border: none;
+    background-color:#ff0000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.submit{
+    border: none;
+    background-color: #00b11b;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.y {
+    background-color:#007BFF;
+    text-decoration: none;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+.y a {
+    color: #ffffff;
+}
