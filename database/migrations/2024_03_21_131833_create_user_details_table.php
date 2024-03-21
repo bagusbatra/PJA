@@ -9,28 +9,30 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('detailuser', function (Blueprint $table) {
+        Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('nama_pemesan');
-            $table->string('nama_instansi');
+            $table->string('nama_instansi')->nullable();
             $table->string('email');
             $table->string('telepon');
             $table->string('alamat');
             $table->string('kode_pos');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('detailuser');
+        Schema::dropIfExists('user_details');
     }
 };

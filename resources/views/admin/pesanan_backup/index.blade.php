@@ -28,11 +28,6 @@
                         <button class="btn btn-primary">Search</button>
                     </div>
                 </form>
-                {{-- TOMBOL TAMBAH PRODUK --}}
-                <button type="button" class="y">
-                    <a href="{{ route('produk.tambah') }}">Tambah Produk</a>
-                </button>
-                {{-- TOMBOL TAMBAH PRODUK --}}
             </div>
 
             <div class="card">
@@ -40,7 +35,7 @@
                     <table class="table" style="text-align: center;">
                         <thead>
                             <tr>
-                                <th style="width: 8%;">No</th>
+                                <th style="width: 8%;">ID</th>
                                 <th style="width: 10%;">Image</th>
                                 <th style="width: 17%;">Name</th>
                                 <th style="width: 17%;">Price</th>
@@ -50,33 +45,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $nomor = 1;
-                            @endphp
-                            @foreach ($produks as $produk)
+                            @foreach ($quotations as $quotation)
                                 <tr>
-                                    <td>{{ $nomor++ }}</td>
-                                    <td><img src="{{ asset('storage/' . $produk->gambar) }}" style="max-width: 100px;"></td>
-                                    <td>{{ $produk->nama_produk }}</td>
-                                    <td>{{ $produk->price }}</td>
-                                    <td>{{ $produk->tipe_produk }}</td>
-                                    <td>{{ $produk->keterangan }}</td>
+                                    <td>{{ $quotation->id }}</td>
+                                    <td>{{ $quotation->user_id }}</td>
+                                    <td>{{ $quotation->price }}</td>
+                                    <td>{{ $quotation->tipe_produk }}</td>
+                                    <td>{{ $quotation->keterangan }}</td>
                                     <td>
-                                        <a href="{{ route('produk.edit', ['id' => $produk->id]) }}"
+                                        <a href="{{ route('pesanan.cetak', ['id' => $quotation->id]) }}"
                                             class="btn btn-primary"><i class="ti-pencil-alt"></i></a>
                                         {{-- Hapus --}}
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#DeleteProduk{{ $produk->id }}">
+                                            data-target="#DeleteProduk{{ $quotation->id }}">
                                             <i class="ti-trash"></i>
                                         </button>
                                         <!-- Modal Konfirmasi Hapus -->
-                                        <div class="modal fade" id="DeleteProduk{{ $produk->id }}" tabindex="-1"
-                                            role="dialog" aria-labelledby="deleteModalLabel{{ $produk->id }}"
+                                        <div class="modal fade" id="DeleteProduk{{ $quotation->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="deleteModalLabel{{ $quotation->id }}"
                                             aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="deleteModalLabel{{ $produk->id }}">
+                                                        <h5 class="modal-title" id="deleteModalLabel{{ $quotation->id }}">
                                                             Konfirmasi Hapus</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -89,7 +80,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('produk.destroy', $produk->id) }}"
+                                                        <form action="{{ route('produk.destroy', $quotation->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -115,9 +106,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            @foreach ($produks as $produk)
-                $('#saveChangesBtn{{ $produk->id }}').click(function() {
-                    $('#editForm{{ $produk->id }}').submit();
+            @foreach ($quotations as $produk)
+                $('#saveChangesBtn{{ $quotation->id }}').click(function() {
+                    $('#editForm{{ $quotation->id }}').submit();
                 });
             @endforeach
         });
