@@ -4,43 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Produk;
+use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\TransactionItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerCartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $produks = Produk::all();
-        $carts = Cart::all();
-        return view('/customer/cart/index', compact('produks'));
+        $user = Auth::user(); // Mengambil user yang sedang login
+        $carts = Cart::where('user_id', $user->id)->with('product')->get();
+        return view('/customer/cart/index', compact('carts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // $id = $request->id;
         if (Auth::check()) {
-            $userId = Auth::user()->id; // Mendapatkan ID pengguna yang login
-            $produk = Produk::first();
-            $produkId = $produk->id;
-    
+            $userId = Auth::id();
+            $product = Produk::find($id);
+
+            if (!$product) {
+                return back()->with('error', 'Produk tidak ditemukan.');
+            }
+
             // Cek apakah produk sudah ada di dalam keranjang pengguna
-            $cartItem = Cart::where('user_id', $userId)->where('produk_id', $produkId)->first();
+            $cartItem = Cart::where('user_id', $userId)->where('produk_id', $product->id)->first();
 
             if ($cartItem) {
                 // Jika produk sudah ada di keranjang, tambahkan ke jumlah quantity
@@ -49,13 +40,11 @@ class CustomerCartController extends Controller
                 // Jika produk belum ada di keranjang, tambahkan entri baru
                 Cart::create([
                     'user_id' => $userId,
-                    'produk_id' => $produkId,
+                    'produk_id' => $product->id,
                     'quantity' => 1, // Quantity awal
                 ]);
             }
 
-
-    
             // Kembali ke halaman sebelumnya atau halaman keranjang dengan pesan sukses
             return back()->with('success', 'Produk berhasil ditambahkan ke keranjang.');
         } else {
@@ -64,12 +53,13 @@ class CustomerCartController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $produks = DB::table('produk')->where('id',$id)->get();
+        $produks = DB::table('produk')->where('id', $id)->get();
         // $produks = Produk::findOrFail($id);
         // dd($produks);
         return view('customer.shop.detail', compact('produks'));
@@ -98,7 +88,49 @@ class CustomerCartController extends Controller
     {
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        
-        return redirect()->route('cart')->with('success', 'Produk berhasil dihapus.');
+
+        return redirect()->route('cart.index')->with('success', 'Produk berhasil dihapus.');
+    }
+
+    public function checkout()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $cartItems = Cart::where('user_id', $userId)->with('product')->get();
+
+            if ($cartItems->isEmpty()) {
+                return redirect()->route('cart.index')->with('error', 'Keranjang belanja Anda kosong.');
+            }
+
+            // Hitung total harga
+            $totalPrice = $cartItems->sum(function ($item) {
+                return $item->product->price * $item->quantity;
+            });
+
+            // Memulai transaksi dengan UUID baru
+            $transaction = Transaction::create([
+                'id' => Str::uuid(),
+                'user_id' => $userId,
+                'total_price' => $totalPrice,
+                'status' => 'Berhasil',
+            ]);
+
+            // Menambahkan item transaksi berdasarkan item dalam keranjang
+            foreach ($cartItems as $cartItem) {
+                TransactionItem::create([
+                    'transaction_id' => $transaction->id,
+                    'product_id' => $cartItem->produk_id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->product->price, // Anda mungkin juga perlu menyimpan harga per item dalam tabel transaksi
+                ]);
+
+                // Menghapus item keranjang
+                $cartItem->delete();
+            }
+
+            return redirect()->route('transaction.show', $transaction->id)->with('success', 'Pembelian berhasil.');
+        } else {
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
+        }
     }
 }

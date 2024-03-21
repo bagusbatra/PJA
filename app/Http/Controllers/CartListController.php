@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CartListController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $user = Auth::user(); // Mengambil user yang sedang login
 
@@ -20,49 +21,45 @@ class CartListController extends Controller
 
         $produks = Produk::all();
         // $carts = Cart::all();
-        return view('/customer/cart/list', compact('produks'), compact('carts'));
+        return view('/customer/cart/index', compact('produks'), compact('carts'));
     }
 
     public function edit($id)
     {
-        $carts = DB::table('cart')->where('id',$id)->get();
+        $carts = DB::table('cart')->where('id', $id)->get();
         // $produks = Produk::findOrFail($id);
         // dd($produks);
         return view('customer.cart.edit', compact('carts'));
     }
 
     public function update(Request $request, $id)
-    {        
-    // Validasi data
-    $data = $request->validate([
-        'quantity' => 'required',
-    ]);
+    {
+        // Validasi data
+        $data = $request->validate([
+            'quantity' => 'required',
+        ]);
 
-    // Cari produk berdasarkan ID
-    $carts = Cart::find($id);
+        // Cari produk berdasarkan ID
+        $carts = Cart::find($id);
 
-    // Periksa apakah produk ditemukan
-    if (!$carts) {
-        return redirect()->back()->with('error', 'Produk tidak ditemukan.');
-    }
+        // Periksa apakah produk ditemukan
+        if (!$carts) {
+            return redirect()->back()->with('error', 'Produk tidak ditemukan.');
+        }
 
-    $carts->quantity = $request->quantity;
+        $carts->quantity = $request->quantity;
 
-    // Simpan perubahan
-    $carts->save();
+        // Simpan perubahan
+        $carts->save();
 
-    return redirect()->route('customer.cart.list')->with('success', 'Produk berhasil diperbarui');
-
+        return redirect()->route('customer.cart.list')->with('success', 'Produk berhasil diperbarui');
     }
 
     public function destroy(string $id)
     {
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        
+
         return redirect()->route('customer.cart.list')->with('success', 'Produk berhasil dihapus.');
     }
-
 }
-
-

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produk', function (Blueprint $table) {
-            $table->id(); 
+            $table->uuid('id')->primary();
             $table->string('nama_produk');
             $table->string('tipe_produk');
             $table->decimal('price', 12)->nullable();
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('upload_pdf')->nullable();
             $table->timestamps();
         });
-        
     }
 
     /**
