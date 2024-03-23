@@ -50,8 +50,8 @@
                                         <h2 class="h5 text-black">{{ $cart->quantity }}</h2>
                                     </td>
                                     <td>
-                                        <a href="{{ route('cart.edit', $cart->id) }}" class="btn btn-primary"><i
-                                                class="ti-pencil-alt"></i></a>
+                                        {{-- <a href="{{ route('cart.edit', $cart->id) }}" class="btn btn-primary"><i
+                                                class="ti-pencil-alt"></i></a> --}}
                                         {{-- Hapus --}}
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#DeleteProduk{{ $cart->id }}">
@@ -142,14 +142,9 @@
                                         <input type="text" name="kode_pos" class="form-control"
                                             placeholder="Kode Pos" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-block mb-5">Checkout</button>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                <form action="{{ route('transaction.store') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">Checkout</button>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary btn-block mb-5">Checkout</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

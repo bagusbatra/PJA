@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Produk;
+use App\Models\UserDetail;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -92,11 +93,26 @@ class CustomerCartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Produk berhasil dihapus.');
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
         if (Auth::check()) {
             $userId = Auth::id();
             $cartItems = Cart::where('user_id', $userId)->with('product')->get();
+
+            $currentDate = now();
+            $dateFormat = $currentDate->format('m');
+            $lastTransaction = Transaction::whereYear('created_at', $currentDate->year)
+                ->whereMonth('created_at', $currentDate->month)
+                ->latest('created_at')
+                ->first();
+            if (!$lastTransaction) {
+                $transactionNumber = 1;
+            } else {
+                $lastTransactionNumber = explode('/', $lastTransaction->number)[0];
+                $transactionNumber = intval($lastTransactionNumber) + 1;
+            }
+            $transactionNumberFormatted = str_pad($transactionNumber, 4, '0', STR_PAD_LEFT);
+            $transactionCode = $transactionNumberFormatted . '/PEN/PJA/' . $dateFormat . '/' . $currentDate->year;
 
             if ($cartItems->isEmpty()) {
                 return redirect()->route('cart.index')->with('error', 'Keranjang belanja Anda kosong.');
@@ -111,8 +127,9 @@ class CustomerCartController extends Controller
             $transaction = Transaction::create([
                 'id' => Str::uuid(),
                 'user_id' => $userId,
+                'number' => $transactionCode,
                 'total_price' => $totalPrice,
-                'status' => 'Berhasil',
+                'status' => 'Menunggu Konfirmasi',
             ]);
 
             // Menambahkan item transaksi berdasarkan item dalam keranjang
@@ -128,7 +145,18 @@ class CustomerCartController extends Controller
                 $cartItem->delete();
             }
 
-            return redirect()->route('transaction.show', $transaction->id)->with('success', 'Pembelian berhasil.');
+            UserDetail::create([
+                'user_id' => $userId,
+                'nama_pemesan' => $request->nama_pemesan,
+                'nama_instansi' => $request->nama_instansi,
+                'email' => $request->email,
+                'telepon' => $request->telepon,
+                'alamat' => $request->alamat,
+                'kode_pos' => $request->kode_pos,
+            ]);
+
+
+            return redirect()->route('transaction.index')->with('success', 'Pembelian berhasil.');
         } else {
             return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
         }

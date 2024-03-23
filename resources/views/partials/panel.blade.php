@@ -15,7 +15,8 @@
                   <li><a class="nav-link" href="{{ route('shop.index') }}">Shop</a></li>
                   <li><a class="nav-link" href="about.html">About us</a></li>
                   <li><a class="nav-link" href="contact.html">Contact us</a></li>
-                  <li><a class="account" href=""><i class="bi bi-person-circle fs-5"></i></a></li>
+                  <li><a class="account" href="{{ route('transaction.index') }}"><i
+                              class="bi bi-person-circle fs-5"></i></a></li>
                   <li><a class="account" href="{{ route('actionlogout') }}"><i
                               class="bi bi-box-arrow-left fs-5 "></i></a></li>
                   <li><a class="cart" href="{{ route('cart.index') }}"><i class="bi bi-cart fs-5"></i></a></li>

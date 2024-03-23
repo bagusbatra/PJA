@@ -30,22 +30,26 @@
                                 <th>Total Harga</th>
                                 <th>Status</th>
                                 <th>Tanggal</th>
+                                <th>Quotation</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($transactions as $transaction)
                                 <tr>
                                     <td class="product-name">
-                                        <h2 class="h5 text-black">{{ $transaction->id }}</h2>
+                                        <h2 class="h5 text-black">{{ $transaction->number }}</h2>
                                     </td>
                                     <td class="product-type">
-                                        <h2 class="h5 text-black">{{ $transaction->total_price }}</h2>
+                                        <h2 class="h5 text-black">Rp. {{ number_format($transaction->total_price) }}</h2>
                                     </td>
                                     <td class="product-type">
                                         <h2 class="h5 text-black">{{ $transaction->status }}</h2>
                                     </td>
                                     <td class="product-type">
                                         <h2 class="h5 text-black">{{ $transaction->created_at }}</h2>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('quotation.generate', $transaction->id) }}">Download</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -60,6 +60,7 @@ Route::resource('cart', CustomerCartController::class)->middleware('auth');
 Route::get('/add-to-cart/{id}', [CustomerCartController::class, 'store'])->name('addToCart')->middleware('auth');
 Route::post('/checkout', [CustomerCartController::class, 'checkout'])->name('cart.checkout')->middleware('auth');
 Route::resource('transaction', TransactionController::class)->middleware('auth');
+Route::get('/quotation/generate/{id}', [QuotationController::class, 'generate'])->name('quotation.generate')->middleware('auth');
 
 
 // Route::get('/cart/{id}', [ProdukController::class, 'show'])->name('cart.show')->middleware('auth');

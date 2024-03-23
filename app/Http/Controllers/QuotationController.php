@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Quotation;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class QuotationController extends Controller
 {
-    public function index()
+    public function generate($id)
     {
-        $transactions = Transaction::all();
-        $quotations = Quotation::all();
-        return view('admin/pesanan/index', compact('transactions', 'quotations'));
-    }
+        $transaction = Transaction::where('id', $id)->first();
 
-    // public function cetak($id)
-    // {
-    //     $quotations = Quotation::all();
-    //     return view('admin/pesanan/quotation', compact('quotations'));
-    // }
+        if (!auth()->user()) {
+            return redirect()->route('login');
+        }
 
-    public function show($id)
-    {
-        $quotation = Quotation::findOrFail($id); // Mengambil pesanan berdasarkan ID
-        return view('admin.pesanan.quotation', compact('quotation')); // Meneruskan pesanan ke tampilan
+        $pdf = PDF::loadView('generate-quotation');
+        $pdf->setPaper('A4');
+
+        $pdf->getDomPDF()->getOptions()->set('title', 'Quotation-' . $transaction->number);
+
+        return $pdf->download('Quotation-' . $transaction->number . '.pdf');
     }
 }

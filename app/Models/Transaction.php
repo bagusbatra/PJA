@@ -12,7 +12,7 @@ class Transaction extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
 
-    protected $fillable = ['id', 'user_id', 'total_price', 'status'];
+    protected $fillable = ['id', 'number', 'user_id', 'total_price', 'status'];
 
     public function user()
     {
