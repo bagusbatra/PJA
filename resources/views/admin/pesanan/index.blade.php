@@ -14,12 +14,13 @@
                     <table class="table" style="text-align: center;">
                         <thead>
                             <tr>
-                                <th style="width: 8%;">No</th>
-                                <th style="width: 10%;">ID Pesanan</th>
-                                <th style="width: 17%;">Nama</th>
-                                <th style="width: 17%;">Total Pesanan</th>
-                                <th style="width: 15%;">Jumlah Item</th>
-                                <th style="width: 15%;">Action</th>
+                                <th>No</th>
+                                <th>ID Pesanan</th>
+                                <th>No. Pesanan</th>
+                                <th>Nama</th>
+                                <th>Total Pesanan</th>
+                                <th>Jumlah Item</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $transaction->id }}</td>
+                                    <td>{{ $transaction->number }}</td>
                                     <td>{{ $transaction->user->name }}</td>
                                     <td>{{ $transaction->total_price }}</td>
                                     <td>{{ $transaction->items->sum('quantity') }}</td>

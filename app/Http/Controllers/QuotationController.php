@@ -7,6 +7,12 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class QuotationController extends Controller
 {
+    public function index()
+    {
+        $transactions = Transaction::all();
+        return view('admin/pesanan/index', compact('transactions'));
+    }
+
     public function generate($id)
     {
         $transaction = Transaction::where('id', $id)->first();
