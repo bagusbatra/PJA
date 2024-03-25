@@ -3,22 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use App\Models\TransactionItem;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
     public function index()
     {
-        // Ambil daftar transaksi pengguna yang sedang login
         $transactions = Transaction::where('user_id', auth()->id())->orderBy('created_at', 'DESC')->get();
         return view('customer.transaction.index', compact('transactions'));
     }
 
-    public function show($id)
+    public function edit($id)
     {
-        $produks = DB::table('produk')->where('id', $id)->get();
-        // $produks = Produk::findOrFail($id);
-        // dd($produks);
-        return view('customer.shop.detail', compact('produks'));
+        $transaction = Transaction::where('id', $id)->first();
+        $transaction_items = TransactionItem::where('transaction_id', $id)->get();
+        return view('admin.pesanan.edit', compact('transaction', 'transaction_items'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::where('id', $id)->first();
+        $transaction->update([
+            'status' => $request->status,
+        ]);
+        return redirect()->route('pesanan.index');
     }
 }

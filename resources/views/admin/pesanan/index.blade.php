@@ -20,6 +20,7 @@
                                 <th>Nama</th>
                                 <th>Total Pesanan</th>
                                 <th>Jumlah Item</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,7 +36,15 @@
                                     <td>{{ $transaction->user->name }}</td>
                                     <td>{{ $transaction->total_price }}</td>
                                     <td>{{ $transaction->items->sum('quantity') }}</td>
-                                    <td></td>
+                                    <td>{{ $transaction->status }}</td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('transaction.edit', $transaction->id) }}"><i
+                                                class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a class="btn btn-primary btn-sm"
+                                            href="{{ route('quotation.generate', $transaction->id) }}"><i
+                                                class="fa fa-download" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

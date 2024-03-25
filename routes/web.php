@@ -10,6 +10,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CartListController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CustomerCartController;
@@ -28,9 +29,9 @@ use App\Http\Controllers\CustomerShopController;
 
 
 
-Route::get('/admin', function () {
-    return view('admin/index');
-})->name('admin');
+
+Route::get('admin', [DashboardController::class, 'index'])->name('admin');
+
 Route::get('riwayat', function () {
     return view('admin/riwayat/index');
 })->name('riwayat');

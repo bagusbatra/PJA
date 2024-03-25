@@ -37,7 +37,9 @@
                             @foreach ($transactions as $transaction)
                                 <tr>
                                     <td class="product-name">
+                                        {{-- <a href="{{ route('transaction.show', $transaction->id) }}"> --}}
                                         <h2 class="h5 text-black">{{ $transaction->number }}</h2>
+                                        {{-- </a> --}}
                                     </td>
                                     <td class="product-type">
                                         <h2 class="h5 text-black">Rp. {{ number_format($transaction->total_price) }}</h2>
