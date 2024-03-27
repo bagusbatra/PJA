@@ -17,11 +17,7 @@
                         <a href="{{ route('riwayat') }}"> <i class="menu-icon ti-reload"></i>Riwayat </a>
                     </li>
 
-<<<<<<< HEAD
                     {{-- <li class="menu-title">Icons</li><!-- /.menu-title -->
-=======
-                    <li class="menu-title">Icons</li><!-- /.menu-title -->
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
@@ -57,11 +53,7 @@
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul>
-<<<<<<< HEAD
                     </li> --}}
-=======
-                    </li>
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

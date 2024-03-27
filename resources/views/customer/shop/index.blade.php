@@ -23,12 +23,7 @@
         <div class="container">
             <div class="row">
 
-<<<<<<< HEAD
                 @foreach ($produks as $produk)
-=======
-                @foreach ($produks as $key => $produk)
-                    @if ($key < 3)
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                             <a class="product-item" href="{{ route('addToCart', $produk->id) }}">
                                 <img src="{{ asset('storage/' . $produk->gambar) }}"
@@ -37,10 +32,6 @@
                                 <p>{{ $produk->tipe_produk }}</p>
                             </a>
                         </div>
-<<<<<<< HEAD
-=======
-                    @endif
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                 @endforeach
 
             </div>

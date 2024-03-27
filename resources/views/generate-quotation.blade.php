@@ -40,15 +40,12 @@
             line-height: 35px;
             font-size: 11px !important;
         }
-<<<<<<< HEAD
         .image-ttd {
             display: flex;
             justify-content: center; /* Untuk mengatur horizontal centering */
             align-items: center;     /* Untuk mengatur vertical centering */
             height: 300px;           /* Atur tinggi sesuai kebutuhan */
         }
-=======
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
     </style>
 </head>
 
@@ -56,11 +53,7 @@
     <table class="w-100" cellspacing="0" cellpadding="0">
         <tr style="text-align: center;">
             <td rowspan="4" style="width: 30%;">
-<<<<<<< HEAD
                 <img src="{{ public_path() }}/storage/identity/logopja.jpg" alt="Logo"
-=======
-                <img src="{{ public_path() }}/storage/identity/logo.jpg" alt="Logo"
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                     style="width: 100%; height: auto;">
             </td>
             <td rowspan="4" class="text-center" style="vertical-align: middle;">
@@ -78,11 +71,7 @@
                     <td>Penawaran Harga</td>
                     <td class="text-right">Tanggal</td>
                     <td> : </td>
-<<<<<<< HEAD
                     <td>{{ $transaction->created_at->formatLocalized('%d %B %Y') }}</td>
-=======
-                    <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                 </tr>
                 <tr>
                     <td>Nomor</td>
@@ -191,13 +180,10 @@
                     </tr>
                 </tbody>
             </table>
-<<<<<<< HEAD
             <div class="image-ttd">
                 <img src="{{ public_path() }}/storage/ttd/ttd.png" alt="Image"
                      style="width: 40%; padding-left: 300px">
             </div>
-=======
->>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
         </div>
     </div>
 
