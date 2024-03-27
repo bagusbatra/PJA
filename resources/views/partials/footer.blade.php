@@ -8,7 +8,11 @@
 
 				<div class="row g-5 mb-5">
 					<div class="col-lg-4">
+<<<<<<< HEAD
 						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">PJA<span>.</span></a></div>
+=======
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 						<p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
 
 						<ul class="list-unstyled custom-social">

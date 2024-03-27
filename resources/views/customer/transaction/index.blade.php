@@ -19,7 +19,10 @@
     </div>
     <!-- End Hero Section -->
 
+<<<<<<< HEAD
       
+=======
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
     <div class="untree_co-section before-footer-section">
         <div class="container">
             <div class="row mb-5">
@@ -38,7 +41,13 @@
                             @foreach ($transactions as $transaction)
                                 <tr>
                                     <td class="product-name">
+<<<<<<< HEAD
                                         <h2 class="h5 text-black">{{ $transaction->number }}</h2>
+=======
+                                        {{-- <a href="{{ route('transaction.show', $transaction->id) }}"> --}}
+                                        <h2 class="h5 text-black">{{ $transaction->number }}</h2>
+                                        {{-- </a> --}}
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
                                     </td>
                                     <td class="product-type">
                                         <h2 class="h5 text-black">Rp. {{ number_format($transaction->total_price) }}</h2>

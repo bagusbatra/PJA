@@ -10,6 +10,10 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CartListController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RegisterController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\DashboardController;
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CustomerCartController;
@@ -28,9 +32,15 @@ use App\Http\Controllers\CustomerShopController;
 
 
 
+<<<<<<< HEAD
 Route::get('/admin', function () {
     return view('admin/index');
 })->name('admin');
+=======
+
+Route::get('admin', [DashboardController::class, 'index'])->name('admin');
+
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 Route::get('riwayat', function () {
     return view('admin/riwayat/index');
 })->name('riwayat');

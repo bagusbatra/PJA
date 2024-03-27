@@ -123,7 +123,11 @@
 		<!-- End Why Choose Us Section -->
 
 		<!-- Start We Help Section -->
+<<<<<<< HEAD
 		{{-- <div class="we-help-section">
+=======
+		<div class="we-help-section">
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 			<div class="container">
 				<div class="row justify-content-between">
 					<div class="col-lg-7 mb-5 mb-lg-0">
@@ -147,7 +151,11 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 		</div> --}}
+=======
+		</div>
+>>>>>>> 58132d0c69e06bea5abf5330fbf42a8f02cab17f
 		<!-- End We Help Section -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
