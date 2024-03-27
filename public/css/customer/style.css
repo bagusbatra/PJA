@@ -1,0 +1,23 @@
+.ty {
+    padding: 5px;
+    text-align: right;
+}
+.ss {
+    padding-top: 50px;
+}
+.yy {
+    color: #225FA3;
+}
+.parent {
+    height: 300px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.parent .container {
+    width: 100%;
+    border-radius: 10px;
+    height: 100px;
+    background-color: #ffffff;
+}
